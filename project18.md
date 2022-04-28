@@ -73,3 +73,18 @@ terraform {
   }
 }
 ~~~
+
+Let us re-initialise so as to effectively change the location of the state file to remote.
+Run:
+~~~
+terraform init
+~~~
+![](statefile-remote.jpg)
+
+### Verify Changes ###
+![](dynamodb.jpg)
+Lock File in dynamodb
+
+![](statefile.jpg)
+terraform.tfstate file in S3
+
