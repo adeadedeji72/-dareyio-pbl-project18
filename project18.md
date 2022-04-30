@@ -65,9 +65,9 @@ So, let us run terraform apply to provision resources.
 ~~~
 terraform {
   backend "s3" {
-    bucket         = "dev-terraform-bucket"
+    bucket         = "masterclass-s3-bucket"
     key            = "global/s3/terraform.tfstate"
-    region         = "eu-central-1"
+    region         = "us.east-1"
     dynamodb_table = "terraform-locks"
     encrypt        = true
   }
@@ -87,4 +87,26 @@ Lock File in dynamodb
 
 ![](statefile.jpg)
 terraform.tfstate file in S3
+
+### Add Terraform Output ###
+Before we run terraform apply, add an output so that the S3 bucket Amazon Resource Names ARN and DynamoDB table name can be displayed.
+
+Create a new file and name it *output.tf*, add this code:
+
+~~~
+output "s3_bucket_arn" {
+  value       = aws_s3_bucket.terraform_state.arn
+  description = "The ARN of the S3 bucket"
+}
+output "dynamodb_table_name" {
+  value       = aws_dynamodb_table.terraform_locks.name
+  description = "The name of the DynamoDB table"
+}
+~~~
+
+Terraform will automatically read the latest state from the S3 bucket to determine the current state of the infrastructure. Even if another engineer has applied changes, the state file will always be up to date.
+
+Now, head over to the S3 console again, refresh the page, and click the grey “Show” button next to “Versions.” You should now see several versions of your terraform.tfstate file in the S3 bucket:
+![](statefile-versions.jpg)
+
 
