@@ -79,7 +79,7 @@ Run:
 ~~~
 terraform init
 ~~~
-![](statefile-remote.jpg)
+![](init-backend2.jpg)
 
 ### Verify Changes ###
 ![](dynamodb.jpg)
