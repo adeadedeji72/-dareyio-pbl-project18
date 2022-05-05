@@ -110,3 +110,19 @@ Now, head over to the S3 console again, refresh the page, and click the grey “
 ![](statefile-versions.jpg)
 
 
+### Isolation Of Environments ###
+Most likely we will need to create resources for different environments, such as: Dev, sit, uat, preprod, prod, etc.
+
+This separation of environments can be achieved using one of two methods:
+
+1. Terraform Workspaces
+1. Directory based separation using terraform.tfvars file
+
+### WHEN TO USE WORKSPACES OR DIRECTORY? ###
+To separate environments with significant configuration differences, use a **directory structure**. 
+Use **workspaces** for environments that do not greatly deviate from each other, to avoid duplication of your configurations. 
+
+### Security Groups refactoring with dynamic block ###
+For repetitive blocks of code you can use dynamic blocks in Terraform.
+
+Refactor Security Groups creation with dynamic blocks.
